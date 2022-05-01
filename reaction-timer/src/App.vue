@@ -2,7 +2,8 @@
   <div>
     <h1>Reaction Timer</h1>
     <button @click="start" :disabled="isPlaying">Click to play</button>
-    <Block v-if="isPlaying" :delay="delay" />
+    <Block v-if="isPlaying" :delay="delay" @end="endGame" />
+    <p v-if="showScore">Reaction Timer {{ score }} ms</p>
   </div>
 </template>
 
@@ -15,12 +16,20 @@ export default {
     return {
       isPlaying: false,
       delay: null,
+      score: null,
+      showScore: false,
     };
   },
   methods: {
     start() {
       this.delay = 2000 + Math.random() * 5000;
-      this.isPlaying = true;
+      this.isPlaying = true
+      this.showScore = false
+    },
+    endGame(reactionTime) {
+      this.score = reactionTime,
+      this.isPlaying = false,
+      this.showScore = true
     },
   },
 };

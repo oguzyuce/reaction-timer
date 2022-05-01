@@ -20,8 +20,7 @@ export default {
   methods: {
     setClickTime() {
       this.clickTime = new Date();
-      console.log(this.clickTime);
-      console.log(this.reactionTime);
+      this.$emit('end', this.reactionTime)
     },
   },
   mounted() {
